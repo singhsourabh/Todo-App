@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo App</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'task/todo.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+</head>
+<body bgcolor="lightseagreen">
+	<div id="box">
+	<div id = "base">
+		<p id = "header"><B>ToDo</B></p><br>
+	<div if = "content">
+		<form method="POST" role="form" action="{% url 'add' %}">
+			{% csrf_token %}
+			{{forms.text}}<br><button type="submit" class="add">Add</button><a href="{% url 'delete' %}"><button type="button" class="delete" id="del">Delete Completed</button></a><br><br>
+			<ul class="task">
+				{% for todo in todoList %}
+					{% if todo.completed %}
+						<li class="completed">{{ todo.text }}</li>
+					{% else %}
+						<a href="{% url 'completed' todo.id %}"><li class="pending">{{ todo.text }}</li></a>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</form>
+	</div>
+</div>
+</div>
+</body>
+</html>
