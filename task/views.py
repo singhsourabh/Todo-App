@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
-
+from django.http import HttpResponse
 from .models import ToDo
 from .forms import todoForm
 
@@ -10,17 +10,15 @@ def index(request):
 	context = {'todoList' : todoList, 'forms':form}
 	return render(request, 'task/todo.html', context)
 
-@require_POST
+
 def add(request):
-	form = todoForm(request.POST)
-	if form.is_valid():
-		newTask = ToDo(text=request.POST['text'])
-		newTask.save()
-	return redirect('index')
+	newTask = ToDo(text=request.POST['task'])
+	newTask.save()
+	return HttpResponse('')
 
 def delete(request):
 	remove = ToDo.objects.filter(completed__exact=True).delete()
-	return redirect('index')
+	return HttpResponse('')
 
 def completed(request, todo_id):
 	todo = ToDo.objects.get(pk=todo_id)

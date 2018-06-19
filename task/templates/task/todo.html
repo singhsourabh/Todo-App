@@ -11,16 +11,18 @@
 	<div id = "base">
 		<p id = "header"><B>ToDo</B></p><br>
 	<div if = "content">
-		<form method="POST" role="form" action="{% url 'add' %}">
+		<form method="POST" id="formTodo">
 			{% csrf_token %}
-			{{forms.text}}<br><button type="submit" class="add">Add</button><a href="{% url 'delete' %}"><button type="button" class="delete" id="del">Delete Completed</button></a><br><br>
-			<ul class="task">
+			{{forms.text}}<br><button type="submit" class="add" id="add">Add</button>
+			<button type="button" class="delete" id="delid">Delete Completed</button><br><br>
+			<ul class="task" id="taskViewer">
 				{% for todo in todoList %}
 					{% if todo.completed %}
 						<li class="completed">{{ todo.text }}</li>
 					{% else %}
 						<a href="{% url 'completed' todo.id %}"><li class="pending">{{ todo.text }}</li></a>
-					{% endif %}
+	
+						{% endif %}
 				{% endfor %}
 			</ul>
 		</form>
@@ -28,4 +30,32 @@
 </div>
 </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).on('submit','#formTodo', function(event){
+		event.preventDefault();
+		$.ajax({
+			type:'POST',
+			url:'{% url 'add' %}',
+			data:{
+				task:$('#addtask').val(),
+				csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+			},
+			success:function(){
+				$("#taskViewer").load(" #taskViewer");
+			}
+		})
+	});
+	$("#delid").click(function(delE){
+		delE.preventDefault();
+		$.ajax({
+			type: 'GET',
+			url:'{% url 'delete' %}',
+			success:function(){
+				$("#taskViewer").load(" #taskViewer");
+			}
+		})
+	});
+	
+</script>
 </html>

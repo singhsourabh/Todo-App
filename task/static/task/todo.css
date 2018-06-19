@@ -41,7 +41,6 @@ button{
 	border: none;
 	text-align: center;
 	padding: 10px 15px;
-	background-color: darkorchid;
 	color: white;
 	text-decoration: none;
 	display: inline-block;
@@ -50,8 +49,11 @@ button{
 	margin: 5px 5px;
 	cursor: pointer;
 }
-#del{
+#delid{
 	background-color: tomato;
+}
+#add{
+	background-color: darkorchid;
 }
 input[type=text]:focus {
     border: 3px solid slateblue;
