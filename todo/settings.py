@@ -25,7 +25,7 @@ SECRET_KEY = 't7g#3%v+(#-@rp$j!r*q!+4oizx8m+w+4htaf2a36r@3=#$g93'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mysterious-lake-25044.herokuapp.com']
+ALLOWED_HOSTS = ['morning-wave-87006.herokuapp.com']
 
 
 # Application definition
