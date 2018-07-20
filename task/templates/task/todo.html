@@ -10,7 +10,7 @@
 	<div id="box">
 	<div id = "base">
 		<p id = "header"><B>ToDo</B></p><br>
-	<div if = "content">
+	<div id = "content">
 		<form method="POST" id="formTodo">
 			{% csrf_token %}
 			{{forms.text}}<br><button type="submit" class="add" id="add">Add</button>
@@ -21,7 +21,7 @@
 						<li class="completed">{{ todo.text }}</li>
 					{% else %}
 						<a href="{% url 'completed' todo.id %}"><li class="pending">{{ todo.text }}</li></a>
-	
+
 						{% endif %}
 				{% endfor %}
 			</ul>
@@ -56,6 +56,6 @@
 			}
 		})
 	});
-	
+
 </script>
 </html>
