@@ -1,8 +1,7 @@
 language: python
 python:
   - 3.6
-  - 3.7
-install:
+before-script:
   - pip install -r requirements.txt
 # services:
   # celery -A assessment worker --loglevel=info
